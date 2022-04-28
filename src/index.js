@@ -43,5 +43,5 @@ await deviceLoaded(SOCKET_URI, async (device) => {
       await session.stop();
       process.exit();
     }
-  }, TEST_INTERVAL_S);
+  }, TEST_INTERVAL_S * 1000);
 });
