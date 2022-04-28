@@ -33,7 +33,7 @@ The `SOCKET_URI` value is set in the `server/package.json` file in the `start` s
 The `SERVERS` value is set in the `package.json` file in the `server` script.  In future posts, I'll show you how
 to scale the Arcas Load Test servers to increase the load test capacity.
 
-In this test, we're configuring it to create 100 producers (peer connections) that will produce video in the 
+In this test, we're configuring it to create 100 producers (peer connections) that will produce video in the
 Arcas Load Test server for a total of 10 seconds.  Feel free to modify to test how much load the SFU can accommodate.
 
 Using the `Session` class in the SDK, create the session:
@@ -49,7 +49,7 @@ const session = await Session.create({
 ```
 
 We're giving the session a name: `First Session`.  This will come in handy in later posts about using the Arcas Portal.
-The other important session variable is `pollingStateS`.  This tells the Arcas Load Test server to poll the internals for 
+The other important session variable is `pollingStateS`.  This tells the Arcas Load Test server to poll the internals for
 stats every `1` second.  You may want to increase this if scaling the Arcas Load Test servers.
 
 We can now start the session to let the server know we're ready to start sending some load:
@@ -90,27 +90,27 @@ await deviceLoaded(SOCKET_URI, async (device) => {
 });
 ```
 
-That's all the code you'll need to write for this test.  
+That's all the code you'll need to write for this test.
 The next step is to install and start the MediaSoupSFU.
 Before we install the server, ensure that you meet the requirements:
 
 - https://mediasoup.org/documentation/v3/mediasoup/installation/#requirements
-  
-  
+
+
 To install the server:
 
 ```shell
 cd server && yarn
 ```
 
-The installation may take several minutes downloading and compiling the MediaSoup source code.  
+The installation may take several minutes downloading and compiling the MediaSoup source code.
 Once that's done, start the MediaSoup SFU:
 
 ```shell
 yarn start
 ```
 
-You should see the output: 
+You should see the output:
 
 ```
 > mediasoup-server@0.1.2 start /arcas-load-test-mediasoup-example/server
@@ -124,7 +124,7 @@ mediasoup router created in worker
 In a separate terminal window in the `/arcas-load-test-mediasoup-example` directory, start the Arcas Load Test server:
 
 ```shell
-yarn server
+yarn && yarn server
 ```
 
 With both the MediaSoup SFU and the Arcas Load Test server running, we can now start the test.
@@ -159,4 +159,3 @@ in the Arcas Load Test server.  We then created producer peer connections that a
 Arcas Load Test server.
 
 In future posts, I'll detail how monitor the SFU during the test.  Until then, happy testing!
-  
