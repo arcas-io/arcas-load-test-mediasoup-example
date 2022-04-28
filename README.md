@@ -10,13 +10,13 @@ To get a MediaSoup SFU up and running quickly, let's pull down some skeleton cod
 
 ```shell
 git clone -b skeleton https://github.com/arcas-io/arcas-load-test-mediasoup-example.git
-cd arcas-load-test-mediasoup-example/server
+cd arcas-load-test-mediasoup-example/src
 ```
 
 Let's start by creating an entry file:
 
 ```shell
-touch src/index.js
+touch index.js
 ```
 
 Using your favorite editor, import the SDK and MediaSoup signaling code:
