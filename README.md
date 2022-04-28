@@ -8,7 +8,7 @@ cd arcas-load-test-mediasoup-example/server
 Let's start by creating an entry file:
 
 ```shell
-touch index.js
+touch src/index.js
 ```
 
 Using your favorite editor, import the SDK and MediaSoup signaling code:
