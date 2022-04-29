@@ -11,6 +11,6 @@
   },
   "scripts": {
     "start": "ENVIRONMENT=dev node src/index.js",
-    "server": "RUST_LOG=info HOST=[::1] PORT=50051 STATSD_HOST= STATSD_PORT= yarn arcas",
+    "server": "RUST_LOG=info HOST=[::1] PORT=50051 STATSD_HOST= STATSD_PORT= yarn arcas"
   }
 }
