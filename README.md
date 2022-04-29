@@ -2,8 +2,22 @@ Arcas load testing depends on GStreamer version 1.18.X being installed on your c
 
 **NOTE**: Only GStreamer versions 1.18.X are compatible with this demo at this time.
 
-- MacOS - https://gstreamer.freedesktop.org/data/pkg/osx/1.18.6/gstreamer-1.0-1.18.6-x86_64.pkg
-- Windows - https://gstreamer.freedesktop.org/data/pkg/windows/1.18.6/msvc/gstreamer-1.0-msvc-x86-1.18.6.msi
+- MacOS will need to install both of the following:
+  - https://gstreamer.freedesktop.org/data/pkg/osx/1.18.6/gstreamer-1.0-1.18.6-x86_64.pkg
+  - https://gstreamer.freedesktop.org/data/pkg/osx/1.18.6/gstreamer-1.0-devel-1.18.6-x86_64.pkg
+  
+  After installing both of those packages, please run the following commands in the terminal:
+  ```
+  mkdir -p /usr/local/opt/gst-plugins-base
+  ln -s /Library/Frameworks/GStreamer.framework/Versions/1.0/lib /usr/local/opt/gst-plugins-base/lib
+  mkdir -p /usr/local/opt/gstreamer
+  ln -s /Library/Frameworks/GStreamer.framework/Versions/1.0/lib /usr/local/opt/gstreamer/lib
+  ```
+
+- Windows will need to install both of the following:
+  - https://gstreamer.freedesktop.org/data/pkg/windows/1.18.6/msvc/gstreamer-1.0-msvc-x86-1.18.6.msi
+  - https://gstreamer.freedesktop.org/data/pkg/windows/1.18.6/msvc/gstreamer-1.0-devel-msvc-x86-1.18.6.msi
+
 - Linux - Please see the GStreamer installation [guide](https://gstreamer.freedesktop.org/documentation/installing/on-linux.html?gi-language=c)
 
 To get a MediaSoup SFU up and running quickly, let's pull down some skeleton code from https://github.com/arcas-io/arcas-load-test-mediasoup-example.
