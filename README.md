@@ -149,6 +149,8 @@ In a separate terminal window in the `/arcas-load-test-mediasoup-example` direct
 yarn && yarn server
 ```
 
+> Note: If this produces an error loading gst-plugins-base, make sure your Gstreamer version is 1.18.x and that you have followed the installation instructions above.
+
 With both the MediaSoup SFU and the Arcas Load Test server running, we can now start the test.
 In a separate terminal window in the `/arcas-load-test-mediasoup-example` directory, kick off the test:
 
