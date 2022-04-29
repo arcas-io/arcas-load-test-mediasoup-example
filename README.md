@@ -13,7 +13,6 @@ Arcas load testing depends on GStreamer version 1.18.X being installed on your c
   mkdir -p /usr/local/opt/gstreamer
   ln -s /Library/Frameworks/GStreamer.framework/Versions/1.0/lib /usr/local/opt/gstreamer/lib
   ```
-
 - Linux - Please see the GStreamer installation [guide](https://gstreamer.freedesktop.org/documentation/installing/on-linux.html?gi-language=c)
 
 To get a MediaSoup SFU up and running quickly, let's pull down some skeleton code from https://github.com/arcas-io/arcas-load-test-mediasoup-example.
