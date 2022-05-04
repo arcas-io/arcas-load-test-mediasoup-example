@@ -1,8 +1,30 @@
+## System Requirements
+
+Arcas load testing depends on GStreamer version 1.18.X being installed on your computer. If you do not have GStreamer installed you can use the following links to download:
+
+**NOTE**: Only GStreamer versions 1.18.X are compatible with this demo at this time.
+
+- Linux - Please see the GStreamer installation [guide](https://gstreamer.freedesktop.org/documentation/installing/on-linux.html?gi-language=c)
+
+- MacOS will need to install both of the following:
+  - https://gstreamer.freedesktop.org/data/pkg/osx/1.18.6/gstreamer-1.0-1.18.6-x86_64.pkg
+  - https://gstreamer.freedesktop.org/data/pkg/osx/1.18.6/gstreamer-1.0-devel-1.18.6-x86_64.pkg
+  
+  After installing both of those packages, please run the following commands in the terminal:
+  ```
+  mkdir -p /usr/local/opt/gst-plugins-base
+  ln -s /Library/Frameworks/GStreamer.framework/Versions/1.0/lib /usr/local/opt/gst-plugins-base/lib
+  mkdir -p /usr/local/opt/gstreamer
+  ln -s /Library/Frameworks/GStreamer.framework/Versions/1.0/lib /usr/local/opt/gstreamer/lib
+  ```
+
+## Example Instructions
+
 To get a MediaSoup SFU up and running quickly, let's pull down some skeleton code from https://github.com/arcas-io/arcas-load-test-mediasoup-example.
 
 ```shell
 git clone -b skeleton https://github.com/arcas-io/arcas-load-test-mediasoup-example.git
-cd arcas-load-test-mediasoup-example/server
+cd arcas-load-test-mediasoup-example/src
 ```
 
 Let's start by creating an entry file:
@@ -33,7 +55,7 @@ The `SOCKET_URI` value is set in the `server/package.json` file in the `start` s
 The `SERVERS` value is set in the `package.json` file in the `server` script.  In future posts, I'll show you how
 to scale the Arcas Load Test servers to increase the load test capacity.
 
-In this test, we're configuring it to create 100 producers (peer connections) that will produce video in the 
+In this test, we're configuring it to create 100 producers (peer connections) that will produce video in the
 Arcas Load Test server for a total of 10 seconds.  Feel free to modify to test how much load the SFU can accommodate.
 
 Using the `Session` class in the SDK, create the session:
@@ -49,7 +71,7 @@ const session = await Session.create({
 ```
 
 We're giving the session a name: `First Session`.  This will come in handy in later posts about using the Arcas Portal.
-The other important session variable is `pollingStateS`.  This tells the Arcas Load Test server to poll the internals for 
+The other important session variable is `pollingStateS`.  This tells the Arcas Load Test server to poll the internals for
 stats every `1` second.  You may want to increase this if scaling the Arcas Load Test servers.
 
 We can now start the session to let the server know we're ready to start sending some load:
@@ -86,31 +108,31 @@ await deviceLoaded(SOCKET_URI, async (device) => {
       await session.stop();
       process.exit();
     }
-  }, TEST_INTERVAL_S);
+  }, TEST_INTERVAL_S * 1000);
 });
 ```
 
-That's all the code you'll need to write for this test.  
+That's all the code you'll need to write for this test.
 The next step is to install and start the MediaSoupSFU.
 Before we install the server, ensure that you meet the requirements:
 
 - https://mediasoup.org/documentation/v3/mediasoup/installation/#requirements
-  
-  
+
+
 To install the server:
 
 ```shell
 cd server && yarn
 ```
 
-The installation may take several minutes downloading and compiling the MediaSoup source code.  
+The installation may take several minutes downloading and compiling the MediaSoup source code.
 Once that's done, start the MediaSoup SFU:
 
 ```shell
 yarn start
 ```
 
-You should see the output: 
+You should see the output:
 
 ```
 > mediasoup-server@0.1.2 start /arcas-load-test-mediasoup-example/server
@@ -124,8 +146,10 @@ mediasoup router created in worker
 In a separate terminal window in the `/arcas-load-test-mediasoup-example` directory, start the Arcas Load Test server:
 
 ```shell
-yarn server
+yarn && yarn server
 ```
+
+> Note: If this produces an error loading gst-plugins-base, make sure your GStreamer version is 1.18.x and that you have followed the installation instructions above.
 
 With both the MediaSoup SFU and the Arcas Load Test server running, we can now start the test.
 In a separate terminal window in the `/arcas-load-test-mediasoup-example` directory, kick off the test:
@@ -159,4 +183,3 @@ in the Arcas Load Test server.  We then created producer peer connections that a
 Arcas Load Test server.
 
 In future posts, I'll detail how monitor the SFU during the test.  Until then, happy testing!
-  
